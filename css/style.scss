@@ -1,0 +1,440 @@
+$blue: #2a42cc;
+$black: #181818;
+$white: #ffffff;
+
+@import "./fonts";
+@import "./mixin";
+
+
+body {
+    margin: 0;
+    font-family: "Montserrat";
+    font-size: 15px;
+}
+
+
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 20px 10px;
+
+    .error{
+        @include form_cover;
+        height: 75px;
+        justify-content: center;
+        align-items: center;        
+        @keyframes hide_error {
+            to {
+                visibility: hidden;
+            }
+    }
+        animation: hide_error 0s ease-in 4s forwards;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .menu {
+        padding-right: 10px;
+        padding-left: 0;
+        margin-right: auto;
+        margin-left: auto;
+
+        display: flex;
+        background-color: #2a42cc;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 26px;
+        font-weight: 600;
+
+        color: white;
+        height: 100px;
+        border-radius: 20px;
+        box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+
+        @media (min-width: 768px) {
+            max-width: 720px;
+        }
+
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+
+        @media (min-width: 1400px) {
+            max-width: 1320px;
+        }
+
+        a {
+            color: white;
+        }
+
+        .home {
+            .home_title {
+                @include title;
+            }
+
+            .home_icon {
+                @include icon;
+            }
+        }
+
+        .search {
+            width: 40%;
+
+            .form_area {
+
+                .item {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    position: relative;
+
+                    .input {
+                        width: 100%;
+                        height: 32px;
+                        border-radius: 50vh;
+                        padding: 0px 50px 0 20px;
+                        font-size: 26px;
+
+                        @media (max-width: 577px) {
+                            font-size: 16px;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .submit {
+                        background-color: transparent;
+                        border: 0;
+                        position: absolute;
+                        right: 2%;
+                        cursor: pointer;
+
+                        &:hover svg {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .count {
+            display: flex;
+            font-size: 22px;
+            padding-right: 5px;
+            border-right: 2px solid $white;
+                @media (max-width: 991px) {
+                                padding: 0;
+                    border: unset;
+                }
+
+            .count_title {
+                @include title;
+                @media (max-width: 991px) {
+                    display: none;
+                }
+            }
+
+            .count_icon {
+                display: none;
+
+                @media (max-width: 991px) {
+                    display: flex;
+                }
+            }
+
+            .count_items {
+                margin: auto;
+            }
+        }
+
+        .add {
+            .l_checkbox_add {
+                display: flex;
+                cursor: pointer;
+
+                &:hover svg {
+                    transform: scale(1.1);
+                }
+            }
+
+            #checkbox_add {
+                display: none;
+
+                &:checked {
+                    +.add_contact {
+                        @include form_cover;
+                    }
+                }
+            }
+
+            .add_contact {
+                display: none;
+
+                .form_area {
+                    @include form;
+                }
+            }
+        }
+
+        .login {
+            .logout_title {
+                @include title;
+            }
+
+            .logout_icon {
+                @include icon;
+            }
+
+            .login_title {
+                @include title;
+            }
+
+            .login_icon {
+                @include icon;
+            }
+
+            #checkbox_login {
+                display: none;
+
+                &:checked {
+                    +.login_menu {
+                        @include form_cover;
+                    }
+                }
+            }
+
+            .login_menu {
+                display: none;
+
+                .form_area {
+                    @include form;
+                }
+            }
+        }
+    }
+
+    .table_cover {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .table {
+            margin-top: 50px;
+            border-collapse: collapse;
+
+            .contact {
+                position: relative;
+            }
+
+            tr {
+                font-size: 15px;
+                vertical-align: middle;
+
+                &:nth-child(even) {
+                    background-color: #f2f2f2
+                }
+
+                &:hover:nth-child(n+2) {
+                    background-color: lightgray;
+                }
+
+                th {
+                    margin-right: 10px;
+                    font-size: 17px;
+                    font-weight: 600;
+                    text-align: start;
+
+                    &:last-child {
+                        padding-left: 10px;
+
+                        @media (max-width: 577px) {
+                            display: none;
+                        }
+                    }
+                }
+
+                td {
+                    padding: 0px 5px;
+                    height: 50px;
+
+                    &:last-child {
+                        display: flex;
+                    }
+
+
+                    .show_options {
+                        margin: auto;
+                        display: flex;
+                        height: 100%;
+
+                        .l_show_option {
+                            cursor: pointer;
+                            display: none;
+
+                            &:hover svg {
+                                transform: scale(1.1);
+                            }
+
+                            @media (max-width: 577px) {
+                                display: flex;
+                                margin: auto;
+                            }
+
+                        }
+
+                        .checkbox_show_options {
+                            display: none;
+
+                            &:checked {
+                                +.options {
+                                    display: flex;
+                                    z-index: 2;
+
+                                    @media (max-width: 577px) {
+                                        flex-direction: column;
+                                        position: absolute;
+                                        top: 100%;
+                                        padding: 5px 0;
+                                    }
+
+                                    background: white;
+                                }
+
+                            }
+
+                        }
+
+                        .options {
+                            @include title;
+
+                            .option {
+                                margin: auto 5px;
+
+                                @media (max-width: 577px) {
+                                    margin: 0;
+                                }
+
+                                &:hover svg {
+                                    transform: scale(1.1);
+                                }
+                            }
+
+                            .show {
+                                label {
+                                    cursor: pointer;
+                                }
+
+                                .checkbox_show {
+                                    display: none;
+
+                                    &:checked {
+                                        +.show_contact {
+                                            display: flex;
+                                            font-weight: 600;
+                                            position: absolute;
+                                            width: 100%;
+                                            left: 0;
+                                            top: 50px;
+                                            z-index: 2;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            background: white;
+
+                                            @media (max-width: 577px) {
+                                                width: 300px;
+                                                left: unset;
+                                                top: 0;
+                                                right: 100%;
+                                                padding-left: 133px;
+                                                padding-bottom: 10px;
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                                .show_contact {
+                                    display: none;
+
+                                    .info {
+                                        display: flex;
+                                        justify-content: start;
+                                        padding: 10px 0;
+                                        border-bottom: 1px solid lightgray;
+                                        width: 100%;
+
+                                        .contact_title {
+                                            font-weight: 600;
+                                            padding-left: 20px;
+                                            width: 25%;
+                                            margin: auto 0;
+
+                                            @media (max-width: 577px) {
+                                                padding-left: 0px;
+                                                width: 30%;
+                                            }
+                                        }
+
+                                        .contact_info {
+                                            font-weight: 400;
+                                            width: 75%;
+                                            margin: auto 0;
+
+                                            @media (max-width: 577px) {
+                                                width: unset;
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+
+                            .update {
+                                .l_checkbox_update {
+                                    cursor: pointer;
+                                }
+
+                                .checkbox_update {
+                                    display: none;
+
+                                    &:checked {
+                                        +.update_contact {
+                                            @include form_cover;
+                                        }
+                                    }
+                                }
+
+                                .update_contact {
+                                    display: none;
+
+                                    .form_area {
+                                        @include form;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

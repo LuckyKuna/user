@@ -1,0 +1,762 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-Bold.ttf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-ExtraBold.ttf);
+  font-weight: 800;
+}
+body {
+  margin: 0;
+  font-family: "Montserrat";
+  font-size: 15px;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px 20px 10px;
+}
+#main .error {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #2a42cc;
+  border: 10px solid #181818;
+  border-radius: 20px;
+  width: 500px;
+  z-index: 10;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+  height: 75px;
+  justify-content: center;
+  align-items: center;
+  -webkit-animation: hide_error 0s ease-in 4s forwards;
+          animation: hide_error 0s ease-in 4s forwards;
+}
+@media (max-width: 767px) {
+  #main .error {
+    width: 390px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 577px) {
+  #main .error {
+    width: 290px;
+  }
+}
+@-webkit-keyframes hide_error {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes hide_error {
+  to {
+    visibility: hidden;
+  }
+}
+#main a {
+  text-decoration: none;
+  color: black;
+}
+#main .menu {
+  padding-right: 10px;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  background-color: #2a42cc;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+  height: 100px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+}
+@media (min-width: 576px) {
+  #main .menu {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  #main .menu {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  #main .menu {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  #main .menu {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  #main .menu {
+    max-width: 1320px;
+  }
+}
+#main .menu a {
+  color: white;
+}
+#main .menu .home .home_title {
+  cursor: pointer;
+  display: flex;
+}
+@media (max-width: 577px) {
+  #main .menu .home .home_title {
+    display: none;
+  }
+}
+#main .menu .home .home_icon {
+  cursor: pointer;
+  display: none;
+}
+#main .menu .home .home_icon:hover svg {
+  transform: scale(1.1);
+}
+@media (max-width: 577px) {
+  #main .menu .home .home_icon {
+    display: flex;
+  }
+}
+#main .menu .search {
+  width: 40%;
+}
+#main .menu .search .form_area .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+#main .menu .search .form_area .item .input {
+  width: 100%;
+  height: 32px;
+  border-radius: 50vh;
+  padding: 0px 50px 0 20px;
+  font-size: 26px;
+}
+@media (max-width: 577px) {
+  #main .menu .search .form_area .item .input {
+    font-size: 16px;
+  }
+}
+#main .menu .search .form_area .item .input:focus {
+  outline: none;
+}
+#main .menu .search .form_area .item .submit {
+  background-color: transparent;
+  border: 0;
+  position: absolute;
+  right: 2%;
+  cursor: pointer;
+}
+#main .menu .search .form_area .item .submit:hover svg {
+  transform: scale(1.1);
+}
+#main .menu .count {
+  display: flex;
+  font-size: 22px;
+  padding-right: 5px;
+  border-right: 2px solid #ffffff;
+}
+@media (max-width: 991px) {
+  #main .menu .count {
+    padding: 0;
+    border: unset;
+  }
+}
+#main .menu .count .count_title {
+  cursor: pointer;
+  display: flex;
+}
+@media (max-width: 577px) {
+  #main .menu .count .count_title {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  #main .menu .count .count_title {
+    display: none;
+  }
+}
+#main .menu .count .count_icon {
+  display: none;
+}
+@media (max-width: 991px) {
+  #main .menu .count .count_icon {
+    display: flex;
+  }
+}
+#main .menu .count .count_items {
+  margin: auto;
+}
+#main .menu .add .l_checkbox_add {
+  display: flex;
+  cursor: pointer;
+}
+#main .menu .add .l_checkbox_add:hover svg {
+  transform: scale(1.1);
+}
+#main .menu .add #checkbox_add {
+  display: none;
+}
+#main .menu .add #checkbox_add:checked + .add_contact {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #2a42cc;
+  border: 10px solid #181818;
+  border-radius: 20px;
+  width: 500px;
+  z-index: 10;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 767px) {
+  #main .menu .add #checkbox_add:checked + .add_contact {
+    width: 390px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 577px) {
+  #main .menu .add #checkbox_add:checked + .add_contact {
+    width: 290px;
+  }
+}
+#main .menu .add .add_contact {
+  display: none;
+}
+#main .menu .add .add_contact .form_area {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+}
+#main .menu .add .add_contact .form_area .item {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+}
+@media (max-width: 577px) {
+  #main .menu .add .add_contact .form_area .item {
+    justify-content: space-between;
+  }
+}
+#main .menu .add .add_contact .form_area .item:nth-child(7) {
+  border-bottom: unset;
+}
+#main .menu .add .add_contact .form_area .item label {
+  width: 30%;
+  font-size: 21px;
+}
+@media (max-width: 577px) {
+  #main .menu .add .add_contact .form_area .item label {
+    width: 20%;
+    font-size: 16px;
+  }
+}
+#main .menu .add .add_contact .form_area .item .input {
+  width: 50%;
+  border-radius: 50vh;
+  padding: 0px 20px 0 20px;
+}
+@media (max-width: 577px) {
+  #main .menu .add .add_contact .form_area .item .input {
+    padding: 0px 10px 0 10px;
+  }
+}
+#main .menu .add .add_contact .form_area .item .input:focus {
+  outline: none;
+}
+#main .menu .add .add_contact .form_area .submit {
+  margin: 30px auto 0 auto;
+}
+#main .menu .add .add_contact .form_area .submit .button {
+  width: 201px;
+  height: 53px;
+  background-color: #181818;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 0;
+  border: none;
+  float: left;
+  display: flex;
+  padding-left: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+#main .menu .add .add_contact .form_area .submit .button::after {
+  content: "";
+  background: url(../images/Vector_blue.svg) no-repeat center;
+  position: relative;
+  width: 20px;
+  height: 15px;
+  margin-left: 13px;
+  transition: 0.5s;
+}
+#main .menu .add .add_contact .form_area .submit .button:hover {
+  background-color: #181818;
+}
+#main .menu .add .add_contact .form_area .submit .button:hover::after {
+  margin-left: 23px;
+}
+#main .menu .login .logout_title {
+  cursor: pointer;
+  display: flex;
+}
+@media (max-width: 577px) {
+  #main .menu .login .logout_title {
+    display: none;
+  }
+}
+#main .menu .login .logout_icon {
+  cursor: pointer;
+  display: none;
+}
+#main .menu .login .logout_icon:hover svg {
+  transform: scale(1.1);
+}
+@media (max-width: 577px) {
+  #main .menu .login .logout_icon {
+    display: flex;
+  }
+}
+#main .menu .login .login_title {
+  cursor: pointer;
+  display: flex;
+}
+@media (max-width: 577px) {
+  #main .menu .login .login_title {
+    display: none;
+  }
+}
+#main .menu .login .login_icon {
+  cursor: pointer;
+  display: none;
+}
+#main .menu .login .login_icon:hover svg {
+  transform: scale(1.1);
+}
+@media (max-width: 577px) {
+  #main .menu .login .login_icon {
+    display: flex;
+  }
+}
+#main .menu .login #checkbox_login {
+  display: none;
+}
+#main .menu .login #checkbox_login:checked + .login_menu {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #2a42cc;
+  border: 10px solid #181818;
+  border-radius: 20px;
+  width: 500px;
+  z-index: 10;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 767px) {
+  #main .menu .login #checkbox_login:checked + .login_menu {
+    width: 390px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 577px) {
+  #main .menu .login #checkbox_login:checked + .login_menu {
+    width: 290px;
+  }
+}
+#main .menu .login .login_menu {
+  display: none;
+}
+#main .menu .login .login_menu .form_area {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+}
+#main .menu .login .login_menu .form_area .item {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+}
+@media (max-width: 577px) {
+  #main .menu .login .login_menu .form_area .item {
+    justify-content: space-between;
+  }
+}
+#main .menu .login .login_menu .form_area .item:nth-child(7) {
+  border-bottom: unset;
+}
+#main .menu .login .login_menu .form_area .item label {
+  width: 30%;
+  font-size: 21px;
+}
+@media (max-width: 577px) {
+  #main .menu .login .login_menu .form_area .item label {
+    width: 20%;
+    font-size: 16px;
+  }
+}
+#main .menu .login .login_menu .form_area .item .input {
+  width: 50%;
+  border-radius: 50vh;
+  padding: 0px 20px 0 20px;
+}
+@media (max-width: 577px) {
+  #main .menu .login .login_menu .form_area .item .input {
+    padding: 0px 10px 0 10px;
+  }
+}
+#main .menu .login .login_menu .form_area .item .input:focus {
+  outline: none;
+}
+#main .menu .login .login_menu .form_area .submit {
+  margin: 30px auto 0 auto;
+}
+#main .menu .login .login_menu .form_area .submit .button {
+  width: 201px;
+  height: 53px;
+  background-color: #181818;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 0;
+  border: none;
+  float: left;
+  display: flex;
+  padding-left: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+#main .menu .login .login_menu .form_area .submit .button::after {
+  content: "";
+  background: url(../images/Vector_blue.svg) no-repeat center;
+  position: relative;
+  width: 20px;
+  height: 15px;
+  margin-left: 13px;
+  transition: 0.5s;
+}
+#main .menu .login .login_menu .form_area .submit .button:hover {
+  background-color: #181818;
+}
+#main .menu .login .login_menu .form_area .submit .button:hover::after {
+  margin-left: 23px;
+}
+#main .table_cover {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#main .table_cover .table {
+  margin-top: 50px;
+  border-collapse: collapse;
+}
+#main .table_cover .table .contact {
+  position: relative;
+}
+#main .table_cover .table tr {
+  font-size: 15px;
+  vertical-align: middle;
+}
+#main .table_cover .table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#main .table_cover .table tr:hover:nth-child(n+2) {
+  background-color: lightgray;
+}
+#main .table_cover .table tr th {
+  margin-right: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: start;
+}
+#main .table_cover .table tr th:last-child {
+  padding-left: 10px;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr th:last-child {
+    display: none;
+  }
+}
+#main .table_cover .table tr td {
+  padding: 0px 5px;
+  height: 50px;
+}
+#main .table_cover .table tr td:last-child {
+  display: flex;
+}
+#main .table_cover .table tr td .show_options {
+  margin: auto;
+  display: flex;
+  height: 100%;
+}
+#main .table_cover .table tr td .show_options .l_show_option {
+  cursor: pointer;
+  display: none;
+}
+#main .table_cover .table tr td .show_options .l_show_option:hover svg {
+  transform: scale(1.1);
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .l_show_option {
+    display: flex;
+    margin: auto;
+  }
+}
+#main .table_cover .table tr td .show_options .checkbox_show_options {
+  display: none;
+}
+#main .table_cover .table tr td .show_options .checkbox_show_options:checked + .options {
+  display: flex;
+  z-index: 2;
+  background: white;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .checkbox_show_options:checked + .options {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    padding: 5px 0;
+  }
+}
+#main .table_cover .table tr td .show_options .options {
+  cursor: pointer;
+  display: flex;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options {
+    display: none;
+  }
+}
+#main .table_cover .table tr td .show_options .options .option {
+  margin: auto 5px;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .option {
+    margin: 0;
+  }
+}
+#main .table_cover .table tr td .show_options .options .option:hover svg {
+  transform: scale(1.1);
+}
+#main .table_cover .table tr td .show_options .options .show label {
+  cursor: pointer;
+}
+#main .table_cover .table tr td .show_options .options .show .checkbox_show {
+  display: none;
+}
+#main .table_cover .table tr td .show_options .options .show .checkbox_show:checked + .show_contact {
+  display: flex;
+  font-weight: 600;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50px;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .show .checkbox_show:checked + .show_contact {
+    width: 300px;
+    left: unset;
+    top: 0;
+    right: 100%;
+    padding-left: 133px;
+    padding-bottom: 10px;
+  }
+}
+#main .table_cover .table tr td .show_options .options .show .show_contact {
+  display: none;
+}
+#main .table_cover .table tr td .show_options .options .show .show_contact .info {
+  display: flex;
+  justify-content: start;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+}
+#main .table_cover .table tr td .show_options .options .show .show_contact .info .contact_title {
+  font-weight: 600;
+  padding-left: 20px;
+  width: 25%;
+  margin: auto 0;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .show .show_contact .info .contact_title {
+    padding-left: 0px;
+    width: 30%;
+  }
+}
+#main .table_cover .table tr td .show_options .options .show .show_contact .info .contact_info {
+  font-weight: 400;
+  width: 75%;
+  margin: auto 0;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .show .show_contact .info .contact_info {
+    width: unset;
+  }
+}
+#main .table_cover .table tr td .show_options .options .update .l_checkbox_update {
+  cursor: pointer;
+}
+#main .table_cover .table tr td .show_options .options .update .checkbox_update {
+  display: none;
+}
+#main .table_cover .table tr td .show_options .options .update .checkbox_update:checked + .update_contact {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: #2a42cc;
+  border: 10px solid #181818;
+  border-radius: 20px;
+  width: 500px;
+  z-index: 10;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 767px) {
+  #main .table_cover .table tr td .show_options .options .update .checkbox_update:checked + .update_contact {
+    width: 390px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .update .checkbox_update:checked + .update_contact {
+    width: 290px;
+  }
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact {
+  display: none;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item {
+    justify-content: space-between;
+  }
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item:nth-child(7) {
+  border-bottom: unset;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item label {
+  width: 30%;
+  font-size: 21px;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item label {
+    width: 20%;
+    font-size: 16px;
+  }
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item .input {
+  width: 50%;
+  border-radius: 50vh;
+  padding: 0px 20px 0 20px;
+}
+@media (max-width: 577px) {
+  #main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item .input {
+    padding: 0px 10px 0 10px;
+  }
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .item .input:focus {
+  outline: none;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .submit {
+  margin: 30px auto 0 auto;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .submit .button {
+  width: 201px;
+  height: 53px;
+  background-color: #181818;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 0;
+  border: none;
+  float: left;
+  display: flex;
+  padding-left: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .submit .button::after {
+  content: "";
+  background: url(../images/Vector_blue.svg) no-repeat center;
+  position: relative;
+  width: 20px;
+  height: 15px;
+  margin-left: 13px;
+  transition: 0.5s;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .submit .button:hover {
+  background-color: #181818;
+}
+#main .table_cover .table tr td .show_options .options .update .update_contact .form_area .submit .button:hover::after {
+  margin-left: 23px;
+}/*# sourceMappingURL=style.css.map */
