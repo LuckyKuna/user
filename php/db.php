@@ -9,8 +9,6 @@ if(!$dbcon){
     die('could not find database'. mysqli_error($dbcon));
 }
 
-
-
 $form = [
     'Заклад' => 'school', 
     'Адреса'=> 'address', 

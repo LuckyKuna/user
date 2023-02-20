@@ -199,6 +199,7 @@ body {
 #main .menu .count .count_title {
   cursor: pointer;
   display: flex;
+  cursor: auto;
 }
 @media (max-width: 577px) {
   #main .menu .count .count_title {

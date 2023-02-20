@@ -5,6 +5,12 @@ function logout(){
 	    header('Location: index.php');
     }
 }
+function deleteid($getid){
+    global $dbcon;
+    $query = "DELETE FROM list WHERE Id = '$getid'";
+    mysqli_query($dbcon,$query);
+    header('Location:index.php');
+}
 
 function sortorder($fieldname){
     $sorturl = "?order_by=".$fieldname."&sort=";
@@ -17,66 +23,67 @@ function sortorder($fieldname){
     $sorturl .= $sorttype;
     return $sorturl;
 }
-function delete_contact($getid){
-    include './php/db.php';
-
-    $getid = $_GET['deleteid'];
-    $query = "DELETE FROM list WHERE Id = '$getid'";
-    mysqli_query($dbcon,$query);
-    header('Location:index.php');
-}
 
 function test_input($data) {
   $data = trim($data);
-  $data = stripslashes($data);  
+  $data = stripslashes($data); 
+  $data = htmlentities($data, ENT_QUOTES);
   return $data;
 }
 
-if(isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $sql = mysqli_query($dbcon,"SELECT * FROM logins WHERE userName = '$username' AND password = '$password'");
+$orderby = " ORDER BY `ПІБ`";
 
-    if(mysqli_num_rows($sql) == 1) {
-        $member = mysqli_fetch_assoc($sql);
-        $_SESSION['username'] = $username;
-        $_SESSION['contact_id'] = $member['userId'];
-        header('Location: index.php');
-        }else{
-            $_SESSION['error'] = 'log_error';
-            header('Location:index.php');
-        }
-}
-
-if(isset($_GET['logout'])){
-    logout();
-}
-
-if(isset($_GET['deleteid'])){
-    delete_contact($_GET['deleteid']);
+if(!empty($_GET)){
+    if(isset($_GET['logout'])){
+        logout();
+    }
+    if(isset($_GET['deleteid'])){
+        $getid = $_GET['deleteid'];
+        deleteid($getid);
+    }
+    if(isset($_GET['order_by']) && isset($_GET['sort'])){
+        $orderby = ' order by '.$_GET['order_by'].' '.$_GET['sort'];
+    }    
+}else{
+    unset($_SESSION['search']);
 }
 
 
 if(!empty($_POST)){
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sql = mysqli_query($dbcon,"SELECT * FROM logins WHERE userName = '$username' AND password = '$password'");
+
+        if(mysqli_num_rows($sql) == 1) {
+            $member = mysqli_fetch_assoc($sql);
+            $_SESSION['username'] = $username;
+            $_SESSION['contact_id'] = $member['userId'];
+            header('Location: index.php');
+            }else{
+                $_SESSION['error'] = 'log_error';
+                header('Location:index.php');
+            }
+    }
     if(isset($_POST['add'])){
-        $school =  test_input($_POST['school']);
+        $school = test_input($_POST['school']);
         $address = test_input($_POST['address']);
         $email = test_input($_POST['email']);
-        $web = test_input($_POST["web"]);
+        $web = test_input($_POST['web']);
         $name = test_input($_POST['name']);
         $role = test_input($_POST['role']);
         $phone = test_input($_POST['phone']);
         if(filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/^.{2,100}\.(info|ua|com|org)(\/.*)?/', $web) && preg_match('/^([0-9]{2}[-]){2}[0-9]{2}$/', $phone)){
-        $sql_ins = "INSERT INTO `list` (`Заклад`, `Адреса`, `Email`, `Веб-сторінка`, `ПІБ`, `Посада`, `Телефон`)
-        VALUES ('$school',
-                '$address',  
-                '$email',
-                '$web',
-                '$name',
-                '$role',
-                '$phone')";
-        mysqli_query($dbcon, $sql_ins);
-        header('Location: index.php');            
+            $query = "INSERT INTO `list` (`Заклад`, `Адреса`, `Email`, `Веб-сторінка`, `ПІБ`, `Посада`, `Телефон`)
+            VALUES ('$school',
+                    '$address',  
+                    '$email',
+                    '$web',
+                    '$name',
+                    '$role',
+                    '$phone')";
+            mysqli_query($dbcon, $query);
+            header('Location: index.php');            
         }else {
             $_SESSION['error'] = 'cont_error';
             header('Location: index.php');
@@ -100,18 +107,10 @@ if(!empty($_POST)){
             $_SESSION['error'] = 'cont_error';
             header('Location: index.php');
         }
-        }
-    
+    }
     if(isset($_POST['find'])){
         $_SESSION['search'] =  $_POST['find'];
     }
-}
-
-$orderby = " ORDER BY `ПІБ`";
-if(isset($_GET['order_by']) && isset($_GET['sort'])){
-    $orderby = ' order by '.$_GET['order_by'].' '.$_GET['sort'];
-}else{
-    unset($_SESSION['search']);
 }
 
 $search = $_SESSION['search'];

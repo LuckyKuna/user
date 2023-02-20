@@ -141,12 +141,13 @@ body {
             padding-right: 5px;
             border-right: 2px solid $white;
                 @media (max-width: 991px) {
-                                padding: 0;
+                    padding: 0;
                     border: unset;
                 }
 
             .count_title {
                 @include title;
+                cursor: auto;
                 @media (max-width: 991px) {
                     display: none;
                 }
