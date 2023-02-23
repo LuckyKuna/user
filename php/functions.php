@@ -1,4 +1,11 @@
 <?php
+require './php/db.php';
+$dbcon = dbcon();
+$form = form();
+$show = show();
+$i = 0;
+$ilen = count($form);
+
 function logout(){
     if(isset($_SESSION['username'])){
 	    session_destroy();
@@ -6,12 +13,10 @@ function logout(){
     }
 }
 function deleteid($getid){
-    global $dbcon;
     $query = "DELETE FROM list WHERE Id = '$getid'";
-    mysqli_query($dbcon,$query);
+    mysqli_query(dbcon(),$query);
     header('Location:index.php');
 }
-
 function sortorder($fieldname){
     $sorturl = "?order_by=".$fieldname."&sort=";
     $sorttype = "asc";
@@ -23,7 +28,6 @@ function sortorder($fieldname){
     $sorturl .= $sorttype;
     return $sorturl;
 }
-
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data); 
@@ -66,22 +70,19 @@ if(!empty($_POST)){
             }
     }
     if(isset($_POST['add'])){
-        $school = test_input($_POST['school']);
-        $address = test_input($_POST['address']);
-        $email = test_input($_POST['email']);
-        $web = test_input($_POST['web']);
-        $name = test_input($_POST['name']);
-        $role = test_input($_POST['role']);
-        $phone = test_input($_POST['phone']);
+        foreach ($form as $outerKey => $outerValue){
+            $$outerValue = test_input($_POST["$outerValue"]);
+        }
         if(filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/^.{2,100}\.(info|ua|com|org)(\/.*)?/', $web) && preg_match('/^([0-9]{2}[-]){2}[0-9]{2}$/', $phone)){
-            $query = "INSERT INTO `list` (`Заклад`, `Адреса`, `Email`, `Веб-сторінка`, `ПІБ`, `Посада`, `Телефон`)
-            VALUES ('$school',
-                    '$address',  
-                    '$email',
-                    '$web',
-                    '$name',
-                    '$role',
-                    '$phone')";
+            foreach ($form as $outerKey => $outerValue){
+                $q_add_title .= "`$outerKey` ";
+                $q_add_value .= "'".$$outerValue."' ";
+                if(++$i != $ilen) {
+                    $q_add_title .= ", "; 
+                    $q_add_value .= ", "; 
+                }
+            }
+            $query = "INSERT INTO `list` ($q_add_title) VALUES ($q_add_value)";
             mysqli_query($dbcon, $query);
             header('Location: index.php');            
         }else {
@@ -89,18 +90,18 @@ if(!empty($_POST)){
             header('Location: index.php');
         }
     }
-    if(isset($_POST['update']) && isset($_GET['updateid'])){
+     if(isset($_POST['update']) && isset($_GET['updateid'])){
         // (Condition)?(thing's to do if condition true):(thing's to do if condition false);
-        ($_POST['school'] == '')? $school = test_input($_GET['school']): $school = test_input($_POST['school']);
-        ($_POST['address'] == '')? $address = test_input($_GET['address']): $address = test_input($_POST['address']);
-        ($_POST['email'] == '')? $email = test_input($_GET['email']): $email = test_input($_POST['email']);
-        ($_POST['web'] == '')? $web = test_input($_GET['web']): $web = test_input($_POST['web']);
-        ($_POST['name'] == '')? $name = test_input($_GET['name']): $name = test_input($_POST['name']);
-        ($_POST['role'] == '')? $role = test_input($_GET['role']): $role = test_input($_POST['role']);
-        ($_POST['phone'] == '')? $phone = test_input($_GET['phone']): $phone = test_input($_POST['phone']);
+        foreach ($form as $outerKey => $outerValue){
+            ($_POST["$outerValue"] == '')? $$outerValue = test_input($_GET["$outerValue"]): $$outerValue = test_input($_POST["$outerValue"]);
+        }
         if(filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/^.{2,100}\.(info|ua|com|org)(\/.*)?/', $web) && preg_match('/^([0-9]{2}[-]){2}[0-9]{2}$/', $phone)){
             $getid = $_GET['updateid'];
-            $query = "UPDATE `list` SET `Заклад` = '$school', `Адреса` = '$address', `Email` = '$email', `Веб-сторінка` = '$web', `ПІБ` = '$name', `Посада` = '$role', `Телефон` = '$phone' WHERE `Id` = '$getid'";
+            foreach ($form as $outerKey => $outerValue){
+                $q_update .= "`$outerKey` = '".$$outerValue."' ";
+                if(++$i != $ilen) $q_update .= ", "; 
+            }
+            $query = "UPDATE `list` SET ".$q_update." WHERE `Id` = '$getid'";
             mysqli_query($dbcon,$query);
             header('Location: index.php');
         }else {
@@ -115,19 +116,14 @@ if(!empty($_POST)){
 
 $search = $_SESSION['search'];
 
-if(isset($_POST['search']) || isset($_SESSION['search'])){
-    $query = "SELECT * FROM list WHERE 
-        lower(`Заклад`) LIKE lower('%$search%') OR 
-        lower(`Адреса`) LIKE lower('%$search%') OR 
-        lower(`Email`) LIKE lower('%$search%') OR 
-        lower(`Веб-сторінка`) LIKE lower('%$search%') OR 
-        lower(`ПІБ`) LIKE lower('%$search%') OR 
-        lower(`Посада`) LIKE lower('%$search%') OR
-        lower(`Телефон`) LIKE lower('%$search%')
-        $orderby ";
+if(isset($_SESSION['search'])){
+    foreach ($form as $outerKey => $outerValue){
+        $q_search .= "lower(`$outerKey`) LIKE lower('%$search%') ";
+        if(++$i != $ilen) $q_search .= "OR "; 
+    }
+    $query = "SELECT * FROM list WHERE ".$q_search." $orderby";
 }else{
     $query = "SELECT * FROM list $orderby";
 }
-
 $result = mysqli_query($dbcon,$query);
 $count = mysqli_num_rows($result);

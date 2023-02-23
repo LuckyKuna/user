@@ -1,5 +1,4 @@
 <?php
-require './php/db.php';
 require './php/functions.php';
 ?>
 
@@ -249,9 +248,11 @@ require './php/functions.php';
                                 <input type="checkbox" name="checkbox" id="checkbox_update_<?php echo $count; ?>"
                                     class="checkbox_update" value="value">
                                 <div class="update_contact">
-                                    <form class="form_area"
-                                        action="?updateid=<?php echo $row["Id"].'&school='.$row["Заклад"].'&address='.$row["Адреса"].'&email='.$row["Email"].'&web='.$row["Веб-сторінка"].'&name='.$row["ПІБ"].'&role='.$row["Посада"].'&phone='.$row["Телефон"]; ?>"
-                                        method="POST">
+                                    <form class="form_area" action="?updateid=<?php 
+                                        foreach ($form as $outerKey => $outerValue){
+                                            $link_update .= "&$outerValue=".$row["$outerKey"];
+                                        }
+                                        echo $row["Id"].$link_update; ?>" method="POST">
                                         <?php foreach ($form as $outerKey => $outerValue) { ?>
                                         <div class="item">
                                             <label><?php echo $outerKey; ?></label>
