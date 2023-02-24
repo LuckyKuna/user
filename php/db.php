@@ -25,13 +25,3 @@ function form(){
     ];
     return $form; 
 }
-function show(){
-    $show = [
-        'Заклад', 
-        'Адреса', 
-        'Email', 
-        'Веб-сторінка', 
-        'Посада', 
-    ];    
-    return $show; 
-}

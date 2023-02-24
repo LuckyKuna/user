@@ -141,12 +141,9 @@ require './php/functions.php';
                 <th>Операції</th>
             </tr>
             <?php 
-
         $count = 1;
-        $result = mysqli_query($dbcon,$query);
+        // $result = mysqli_query($dbcon,$query);
 	    while($row = mysqli_fetch_assoc($result)){?>
-
-
             <tr class="contact">
                 <td><?php echo $count;?></td>
                 <td><?php echo $row["ПІБ"];?></td>
@@ -189,13 +186,14 @@ require './php/functions.php';
                                 <input type="checkbox" name="checkbox" id="checkbox_show_<?php echo $count; ?>"
                                     class="checkbox_show" value="value">
                                 <div class="show_contact">
-                                    <?php foreach ($show as $outerValue) { ?>
+                                    <?php foreach ($form as $outerKey => $outerValue) { 
+                                        if ($outerKey !== array_key_last($GLOBALS['form'])) {?>
                                     <div class="info">
-                                        <div class="contact_title"><?php echo $outerValue; ?></div>
-                                        <div class="contact_info"><?php echo $row["$outerValue"];?></div>
+                                        <div class="contact_title"><?php echo $outerKey; ?></div>
+                                        <div class="contact_info"><?php echo $row["$outerKey"];?></div>
                                     </div>
-                                    <?php } ?>
-
+                                    <?php   }
+                                        } ?>
                                 </div>
                             </div>
                             <a href="mailto:<?php echo $row["Email"]; ?>" id="msg" class="option">
